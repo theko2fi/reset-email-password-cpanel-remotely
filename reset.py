@@ -15,35 +15,23 @@ args = parser.parse_args()
 def main(): 
 
     # Define variable to load the wookbook 
-
     wookbook = openpyxl.load_workbook(args.file) 
 
-     
-
     # Define variable to read the active sheet: 
-
     worksheet = wookbook.active 
 
     with open(args.output, "w", encoding='utf8') as file1: 
 
         for row in wookbook.worksheets[0].iter_rows(min_row = 2, max_row = worksheet.max_row, max_col = 3): 
-
             email = row[0].value 
-
             domain = row[1].value 
-
             passwd = row[2].value 
 
-            if (email and passwd and domain) is not None: 
-
-                 
-
+            if (email and passwd and domain) is not None:
                 result = updatepassword(str(email),str(passwd),str(domain)) 
-
-                file1.write(str(bool(result['status']))+"\t"+result['errors']+"\n") 
-
+                file1.write(str(bool(result['status']))+"\t"+result['errors']+"\n")
+              
                 print(result['status'],end='\t') 
-
                 print(result['errors'],end='\n') 
 
  
